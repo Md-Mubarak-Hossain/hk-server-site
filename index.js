@@ -11,7 +11,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("user server!");
 });
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@messengercluster.z2rf1zn.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@hkcluster.kwmicca.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
