@@ -23,40 +23,40 @@ async function run() {
         const database = client.db("HK");
         const userCollection = database.collection("users");
 
-        app.get("/users", async (req, res) => {
+        app.get("/user", async (req, res) => {
             const query = {};
             const cursor = userCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
         });
-        app.get("/users/:id", async (req, res) => {
+        app.get("/user/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await userCollection.findOne(query);
             res.send(result);
         });
-        app.post("/users", async (req, res) => {
+        app.post("/user", async (req, res) => {
             const user = req.body;
             const result = await userCollection.insertOne(user);
             console.log(result);
             res.send(result);
         });
-        app.patch('/users/:id', async (req, res) => {
+        app.patch('/user/:id', async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) }
-            const user = req.body;
+            const users = req.body;
             const updateDoc = {
                 $set: {
-                    email: user.email,
-                    name: user.name,
-                    sector: user.sector,
-                    terms: user.terms,
+                    email: users.email,
+                    name: users.name,
+                    sector: users.sector,
+                    terms: users.terms,
                 }
             }
             const result = await userCollection.updateOne(filter, updateDoc)
             res.send(result)
         })
-        app.delete("/users/:id", async (req, res) => {
+        app.delete("/user/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await userCollection.deleteOne(query);
@@ -69,5 +69,5 @@ async function run() {
 run().catch((err) => console.error(err));
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`HK app listening on port ${port}`);
 });
